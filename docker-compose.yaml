@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  test_page:
+    build:
+      context: ./page_soucedemo
+      dockerfile: Dockerfile
+    env_file:
+      - ./page_soucedemo/.env
+    depends_on:
+      - selenium
+
+  test_api:
+    build:
+      context: ./githubapi
+      dockerfile: Dockerfile
+    env_file:
+      - ./githubapi/.env
+
+  selenium:
+    container_name: selenium
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
